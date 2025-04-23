@@ -56,18 +56,18 @@ VALUES
     ('Company JJ', 'Manufacturing', 370.0, 3100, 1, 20, 12, 7.6),
     ('Company KK', 'Healthcare', 150.2, 3400, 0, 16, 8, 5.3);
 
-1. #SQL Query to filter companies with a certain employee tenure and revenue#
+###Filter companies with a certain employee tenure and revenue
 SELECT company_name
 FROM fortune_companies
 WHERE avg_employee_tenure >6
 AND healthcare_benefits=1;
 
-2. #SQL Query that rounds employee tenure to a whole number#
+###Query that rounds employee tenure to a whole number#
 SELECT company_name
 , ROUND (avg_employee_tenure) AS rounded_avg_employee_tenure
 FROM fortune_companies;
 
-3.#SQL Query that shows if a company offers healthcare and 12 weeks of maternity leave#
+###Shows if a company offers healthcare and 12 weeks of maternity leave#
 SELECT company_name
 , CASE 
 WHEN (healthcare_benefits) = 1 AND (maternity_leave_weeks) >=12 THEN "yes"
@@ -75,10 +75,17 @@ ELSE "no"
 END AS benefits_and_leave
 FROM fortune_companies;
 
-4. #SQL Query that shows the average paid time off days greater than 16 days, grouped by industry, sorted from highest to lowest#
+###Shows the average paid time off days greater than 16 days, grouped by industry, sorted from highest to lowest#
 SELECT industry
 , ROUND (AVG (paid_time_off_days)) AS avg_pto_days
 FROM fortune_companies
 GROUP BY industry
 HAVING AVG(paid_time_off_days) >=17
 ORDER BY avg_pto_days desc;
+
+###Shows the company with the highest revenue in each industry
+SELECT industry
+, max(revenue) AS industry_max
+, company_name
+FROM fortune_companies
+GROUP BY industry;
