@@ -121,7 +121,7 @@ INSERT INTO hotels VALUES
  , (3, 'Four Season''s', '900 Winter Road, Cityville, PA')
  ;
 
-1. Query that shows all VIP responses to the reservation request for the dinner and welcome events (ordered by last name).
+#1. Query that shows all VIP responses to the reservation request for the dinner and welcome events (ordered by last name).
 SELECT vips.last_name
 , vips.first_name
 , reservations.welcome_rsvp
@@ -131,3 +131,14 @@ LEFT JOIN reservations
 ON vips.member_id = reservations.member_id
 ORDER BY vips.last_name;
 
+#2. Query to show only VIPs who responded to the RSVP requests for the welcome and dinner events. Changed bit data to show '1' as "Yes" and '0' as "No. Results are ordered by last name.
+SELECT vips.last_name
+, vips.first_name
+, CASE WHEN (reservations.welcome_rsvp = 1) THEN 'Yes' 
+ELSE 'No' END 'Welcome RSVP'
+, CASE WHEN (reservations.dinner_rsvp = 1) THEN 'Yes' 
+ELSE 'No' END 'Dinner RSVP'
+FROM vips
+INNER JOIN reservations
+ON vips.member_id = reservations.member_id
+ORDER BY vips.last_name;
