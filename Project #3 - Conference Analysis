@@ -102,7 +102,7 @@ INSERT INTO reservations VALUES
 INSERT INTO events VALUES
   (1, 'Climate Change Communication: Engaging the Public and Policy Makers', 'Keynote')
 , (2, 'Climate Change and Public Health: Risks and Responses', 'Panel')
-, (3, 'Climate Change and Agriculture: Ensuring Food Security', 'Panel')
+, (3, 'Climate Change and Agriculture: Ensuring Food Security', 'Panelhinks he over did it. In a lot of pain, etc.')
 , (4, 'Biodiversity and Ecosystem Services in a Changing Climate', 'Panel')
 , (5, 'Indigenous Knowledge and Climate Change Adaptation', 'Panel')
 , (6, 'The Role of Oceans in Climate Change: Impacts and Solutions', 'Panel')
@@ -121,12 +121,13 @@ INSERT INTO hotels VALUES
  , (3, 'Four Season''s', '900 Winter Road, Cityville, PA')
  ;
 
-1. Query that shows VIPs who responded to the reservation request for the dinner and welcome events.
-SELECT vips.first_name
-, vips.last_name
+1. Query that shows all VIP responses to the reservation request for the dinner and welcome events (ordered by last name).
+SELECT vips.last_name
+, vips.first_name
 , reservations.welcome_rsvp
 , reservations.dinner_rsvp
 FROM vips
-INNER JOIN reservations
+LEFT JOIN reservations
 ON vips.member_id = reservations.member_id
+ORDER BY vips.last_name;
 
